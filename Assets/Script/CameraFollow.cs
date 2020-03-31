@@ -12,12 +12,12 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-
-		if (playerTransform.position.x > -23.438 && playerTransform.position.x < 23.418) 
-		{
-			Vector3 temp = transform.position;
-			temp.x = playerTransform.position.x;
-			transform.position = temp;
+		if (playerTransform != null) {
+			if (playerTransform.position.x > -23.438 && playerTransform.position.x < 23.418) {
+				Vector3 temp = transform.position;
+				temp.x = playerTransform.position.x;
+				transform.position = temp;
+			}
 		}
 	}
 }
