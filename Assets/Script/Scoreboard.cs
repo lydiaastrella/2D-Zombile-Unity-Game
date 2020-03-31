@@ -8,6 +8,9 @@ public class Scoreboard : MonoBehaviour {
 	public Text dataText;
 	public Canvas canvas;
 
+	string[] separator = { "," , ":"};
+	float offset = 150;
+
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("start scoreboard");
@@ -16,16 +19,6 @@ public class Scoreboard : MonoBehaviour {
 
 		WWW www = new WWW (URL);
 		StartCoroutine (GetData(www));
-		/*for (int i = 0; i < 10; i++) {
-			float y = 150 - (i * 30);
-			Vector3 position = new Vector3 (0f, y, 0f);
-			Text cloneText = Instantiate (dataText, position, Quaternion.identity) as Text;
-
-			cloneText.transform.SetParent (canvas.transform, false);
-
-			cloneText.text = " data ke " + i.ToString ();
-			cloneText.gameObject.SetActive (true);
-		}*/
 
 	}
 	
@@ -40,14 +33,27 @@ public class Scoreboard : MonoBehaviour {
 			Debug.Log (www.error);
 		} else {
 			Debug.Log (www.text);
-			for (int i = 0; i < 10; i++) {
-				float y = 150 - (i * 30);
-				Vector3 position = new Vector3 (0f, y, 0f);
+
+			string jsonString = www.text.Replace ("{", string.Empty);
+			jsonString = jsonString.Replace ("}", string.Empty);
+			jsonString = jsonString.Replace ("[", string.Empty);
+			jsonString = jsonString.Replace ("]", string.Empty);
+			jsonString = jsonString.Replace ("\"", string.Empty);
+			Debug.Log (jsonString);
+
+			string[] dataObject = jsonString.Split (separator, 80, System.StringSplitOptions.RemoveEmptyEntries);
+			Debug.Log (dataObject [5]);
+			Debug.Log (dataObject [7]);
+
+
+			for (int i = 5; i < dataObject.Length; i+=8) {
+				offset -= 30;
+				Vector3 position = new Vector3 (0f, offset, 0f);
 				Text cloneText = Instantiate (dataText, position, Quaternion.identity) as Text;
 
 				cloneText.transform.SetParent (canvas.transform, false);
 
-				cloneText.text = " data ke " + i.ToString ();
+				cloneText.text = " USERNAME : " + dataObject[i] + " , SCORE : " + dataObject[i+2];
 				cloneText.gameObject.SetActive (true);
 			}
 		}
