@@ -51,11 +51,12 @@ public class Scoreboard : MonoBehaviour {
 				Vector3 position = new Vector3 (0f, offset, 0f);
 				Text cloneText = Instantiate (dataText, position, Quaternion.identity) as Text;
 
-				cloneText.transform.SetParent (canvas.transform, false);
+				cloneText.transform.SetParent (transform, false);
 
 				cloneText.text = " USERNAME : " + dataObject[i] + " , SCORE : " + dataObject[i+2];
 				cloneText.gameObject.SetActive (true);
 			}
 		}
 	}
+		
 }

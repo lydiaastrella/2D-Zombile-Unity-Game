@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
 	public InputField username;
+	public Text winText;
+	public Text loseText;
 	public Text roundText;
 	public Text scoreText;
 	public GameObject updateScoreboard;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour {
 		} else if (gameFinished && round > 3) {
 			//Debug.Log ("Game Finshed");
 			player.SetActive (false);
+			winText.gameObject.SetActive (true);
 			updateScoreboard.SetActive (true);
 		} else if (!gameFinished) {
 			if (enemiesCount == 0) {
@@ -46,9 +49,10 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("Win Round");
 			} else if (playerCount == 0) {
 				Debug.Log ("Lose Round");
-				gameFinished = true;
+				//gameFinished = true;
 				round = 4;
 				player.SetActive (false);
+				loseText.gameObject.SetActive (true);
 				updateScoreboard.SetActive (true);
 			}
 		}
