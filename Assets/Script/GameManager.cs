@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+	public InputField username;
 	public Text roundText;
+	public Text scoreText;
+	public GameObject updateScoreboard;
 
 	int total_round=3;
 	int round;
@@ -33,6 +37,8 @@ public class GameManager : MonoBehaviour {
 			Spawn ();
 		} else if (gameFinished && round > 3) {
 			Debug.Log ("Game Finshed");
+			player.SetActive (false);
+			updateScoreboard.SetActive (true);
 		} else if (!gameFinished) {
 			if (enemiesCount == 0) {
 				gameFinished = true;
@@ -42,6 +48,8 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("Lose Round");
 				gameFinished = true;
 				round = 4;
+				player.SetActive (false);
+				updateScoreboard.SetActive (true);
 			}
 		}
 	}
@@ -58,5 +66,10 @@ public class GameManager : MonoBehaviour {
 			enemySpawned.SetActive (true);
 		}
 		gameFinished = false;
+	}
+
+	public void updateScore(){
+		//update score
+		SceneManager.LoadScene("Menu");
 	}
 }
