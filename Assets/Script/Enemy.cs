@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class Enemy : MonoBehaviour {
 
+	public Text scoreText;
 	public int health = 100;
 	public Transform player;
 	public bool isFlipped = true;
@@ -60,6 +63,9 @@ public class Enemy : MonoBehaviour {
 
 		if (health <= 0) {
 			animator.SetBool ("isDead", true);
+			int score = Int32.Parse (scoreText.text.ToString ());
+			score += 10;
+			scoreText.text = score.ToString ();
 			Invoke("Die",1.2f);
 		}
 	}
