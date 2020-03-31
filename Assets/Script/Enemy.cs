@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour {
 
 	public int attackDamage = 10;
 
+	public Animator animator;
+
 	public void LookAtPlayer(){
 		if (player != null) {
 			Vector3 flipped = transform.localScale;
@@ -57,7 +59,8 @@ public class Enemy : MonoBehaviour {
 		health -= damage;
 
 		if (health <= 0) {
-			Die ();
+			animator.SetBool ("isDead", true);
+			Invoke("Die",1.2f);
 		}
 	}
 
