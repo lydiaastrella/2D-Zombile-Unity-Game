@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MaleRun : StateMachineBehaviour {
 
-	public float speed =2.5f;
+	public float speed =0.5f;
 	public float attackRange = 1.5f;
 
 	Transform player;
