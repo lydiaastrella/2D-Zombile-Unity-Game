@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
+	public GameManager gameManager;
+
 	public Text healthText;
 	public SimpleHealthBar healthBar;
 	public int health = 100;
@@ -32,7 +34,7 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	void DestroyPlayer(){
-		Destroy (gameObject);
+		gameManager.playerCount = 0;
 	}
 
 }

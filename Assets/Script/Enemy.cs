@@ -6,6 +6,8 @@ using System;
 
 public class Enemy : MonoBehaviour {
 
+	public GameManager gameManager;
+
 	public Text scoreText;
 	public int health = 100;
 	public Transform player;
@@ -71,6 +73,8 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void Die(){
+		gameManager.enemiesCount -= 1;
+		Debug.Log (gameManager.enemiesCount);
 		Destroy (gameObject);
 	}
 }
